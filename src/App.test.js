@@ -60,17 +60,10 @@
 
      await userEvent.click(btn);
 
-     await screen.getByTestId('loading');
+     const loading = await screen.getByTestId('loading');
 
-     const inputCep = await screen.findByRole('cep')
-     const inputLocalidade = await screen.findByRole('localidade')
+     expect(loading).toBeInTheDocument();
 
-
-     expect(inputCep.querySelector('input').value).not.toBeNull();
-     expect(inputCep.querySelector('input').value).toEqual('14010150');
-
-     expect(inputLocalidade.querySelector('input').value).not.toBeNull();
-     expect(inputLocalidade.querySelector('input').value).toEqual('Ribeirão Preto')
 
    })
 
