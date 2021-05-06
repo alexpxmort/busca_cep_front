@@ -62,3 +62,16 @@ export const  empty = ( val ) =>{
 export const isObject = (val) => {
   return val instanceof Object; 
 }
+
+export const onlyNumbers = (str)=>{
+  return str.replace(/[^0-9]/g,'');
+}
+
+export const formatCep = (str)=>{
+  return str.replace(/-/g, '')
+}
+
+
+export const exceedLengthCep = (str)=>{
+  return str.length > 8;
+}

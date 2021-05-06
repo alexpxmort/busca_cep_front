@@ -14,7 +14,7 @@
  
        return(
          <FormGroup style={{marginTop:40,marginBottom:10,width:500,marginLeft:10}} data-testid="search_box">
-             <TextField type='search' label={placeholder} variant={'outlined'} ref={ref}  />
+             <TextField inputProps={{ maxLength: 9 }} type='search' label={placeholder} variant={'outlined'} ref={ref}  />
          </FormGroup>
        )
      

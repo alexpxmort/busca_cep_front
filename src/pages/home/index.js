@@ -10,7 +10,7 @@
   import SearchBox from '../../components/search-box';
   import { Button, Container } from '@material-ui/core';
   import {createMethod} from '../../requests/api/api'
-  import {empty} from '../../utils/string.utils'
+  import {empty,formatCep,exceedLengthCep} from '../../utils/string.utils'
   import Message from "../../components/msg_alerts/msg_alert";
 
   
@@ -39,6 +39,7 @@
       const[endereco,setEndereco] = useState(null)
       const[error,setError] = useState(null);
       const refInput = useRef(null);
+      const [cepSearch,setCepSearch] = useState('');
   
  
 
@@ -84,7 +85,6 @@
       }
 
       const  handleClick= useCallback(async()=>{
-          
     
         let cep = refInput.current.querySelector('input').value
 
@@ -94,12 +94,18 @@
             return false;
         }
 
-        let _cepReplace = cep.replace(/-/g, '')
+        let _cepReplace = formatCep(cep)
 
         if(isNaN(_cepReplace)){
             Message('Formato de Cep Inválido','warning');
 
             return false;
+        }
+
+        if(exceedLengthCep(_cepReplace)){
+            Message('Cep Inválido \n O cep possuí no máximo 8 caracteres!','warning');
+
+            return false;   
         }
 
         let _resp = await getData(_cepReplace);
@@ -124,7 +130,6 @@
         }
 
       }
-
 
       const renderScreen = ()=>{
 
